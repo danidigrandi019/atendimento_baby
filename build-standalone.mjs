@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+const read=name=>fs.readFileSync(new URL('./dist/'+name,import.meta.url),'utf8');
+let html=read('index.html');
+html=html.replace('<link rel="stylesheet" href="./style.css">','<style>'+read('style.css').replace("@import url('data:text/css,');",'')+'</style>');
+html=html.replace('<link rel="stylesheet" href="./brand.css">','<style>'+read('brand.css')+'</style>');
+html=html.replace('href="./icon.svg"','href="data:image/svg+xml,'+encodeURIComponent(read('icon.svg'))+'"');
+const js=read('storage.js').replace(/export /g,'')+'\n'+read('app.js').replace(/^import[^\n]+\n/,'');
+html=html.replace('<script type="module" src="./app.js"></script>','<script>\n(async()=>{\n'+js+'\n})();\n</script>');
+fs.writeFileSync(new URL('./vitrine.html',import.meta.url),html);
+console.log('Standalone HTML ready.');

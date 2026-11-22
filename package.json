@@ -1,0 +1,12 @@
+{
+  "name": "atendimento-baby",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Fotos dos sapatos organizadas por cliente, sem cadastro.",
+  "type": "module",
+  "scripts": {
+    "check": "node --check dist/app.js && node --check dist/storage.js && node --check preview.mjs && node --check build-standalone.mjs",
+    "start": "node preview.mjs",
+    "build:standalone": "node build-standalone.mjs"
+  }
+}

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#193f35">
+  <meta name="description" content="Fotografe os sapatos e organize cada atendimento. Sem nomes, sem formulários, sem confusão.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./brand.css">
+  <title>Vitrine · Atendimentos</title>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Vitrine, início"><span class="brand-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h6v6H4zM14 6h6v6h-6zM4 16h6v4H4zM14 16h6v4h-6z" fill="currentColor"/></svg></span>vitrine<span class="brand-dot">.</span></a>
+    <span class="top-caption">Seu atendimento, em foco.</span>
+    <button class="icon-button" id="help" aria-label="Como funciona"><span data-icon="help"></span></button>
+  </header>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Atendimentos">
+      <div class="sidebar-heading"><span class="eyebrow">SEU BALCÃO</span><span class="date" id="today"></span></div>
+      <div class="navigation" role="group" aria-label="Filtrar atendimentos">
+        <button id="active-tab" class="nav-item active" aria-pressed="true"><span data-icon="users"></span> Em atendimento <span class="counter" id="active-count">0</span></button>
+        <button id="history-tab" class="nav-item" aria-pressed="false"><span data-icon="check"></span> Finalizados <span class="counter" id="history-count">0</span></button>
+      </div>
+      <div class="client-label"><span>CLIENTES</span><button id="rail-new" class="icon-button" aria-label="Novo cliente" disabled><span data-icon="plus"></span></button></div>
+      <div class="client-list" id="client-list"></div>
+      <div class="rail-empty" id="rail-empty"><span data-icon="layers"></span><p>Um espaço para<br>cada cliente.</p></div>
+      <div class="sidebar-bottom"><span class="small-dot"></span><span id="storage-label">Abrindo seus atendimentos…</span></div>
+    </aside>
+    <main id="main" tabindex="-1"><div class="loading">Abrindo seus atendimentos…</div></main>
+  </div>
+  <footer class="action-dock" id="action-dock" hidden>
+    <div class="dock-content"><button class="button secondary" id="new-client" disabled><span data-icon="plus"></span><span>Novo cliente</span></button><button class="button primary" id="camera" disabled><span data-icon="camera"></span><span>Tirar foto</span></button></div>
+  </footer>
+  <input id="camera-input" class="visually-hidden" type="file" accept="image/*" capture="environment" tabindex="-1" aria-hidden="true">
+  <input id="gallery-input" class="visually-hidden" type="file" accept="image/*" multiple tabindex="-1" aria-hidden="true">
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <dialog id="viewer" class="viewer" aria-label="Foto do sapato"><div class="viewer-top"><span id="viewer-label"></span><button class="icon-button" id="viewer-close" aria-label="Fechar foto"><span data-icon="close"></span></button></div><div class="viewer-image-wrap"><img id="viewer-image" alt="Sapato fotografado"></div><div class="viewer-bottom"><button class="icon-button" id="viewer-prev" aria-label="Foto anterior"><span data-icon="left"></span></button><span id="viewer-position"></span><button class="icon-button" id="viewer-next" aria-label="Próxima foto"><span data-icon="right"></span></button><button class="icon-button danger" id="photo-delete" aria-label="Excluir esta foto"><span data-icon="trash"></span></button></div></dialog>
+  <dialog id="info" class="sheet"><button class="icon-button sheet-close" data-close="info" aria-label="Fechar ajuda"><span data-icon="close"></span></button><div class="sheet-symbol"><span data-icon="camera"></span></div><span class="eyebrow">SEM COMPLICAÇÃO</span><h2>Foto. Cliente. Pronto.</h2><ol class="help-steps"><li><span>1</span><div><strong>Comece um cliente</strong><p>Ele recebe um número e uma cor. Você não precisa digitar nada.</p></div></li><li><span>2</span><div><strong>Fotografe os sapatos</strong><p>Coloque quantas fotos precisar no mesmo cliente. A quantidade depende do espaço disponível no aparelho.</p></div></li><li><span>3</span><div><strong>Alterne sem misturar</strong><p>Toque no cliente para ver as fotos dele. Ao terminar, finalize o atendimento.</p></div></li></ol><div class="storage-note"><span data-icon="phone"></span><p>As fotos ficam <strong>neste navegador, neste aparelho</strong>. Elas continuam aqui ao recarregar. Limpar os dados do site pode apagá-las; não há sincronização entre aparelhos. Use uma aba normal, fora do modo privado.</p></div><button class="button primary full" data-close="info">Entendi, vamos lá</button></dialog>
+  <dialog id="confirm" class="sheet confirm-sheet"><div class="sheet-symbol"><span data-icon="trash"></span></div><h2 id="confirm-title">Excluir foto?</h2><p id="confirm-description"></p><div class="confirm-actions"><button class="button secondary" id="confirm-cancel">Cancelar</button><button class="button destructive" id="confirm-yes">Excluir</button></div></dialog>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
